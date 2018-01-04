@@ -169,7 +169,7 @@ export const holdParser = (args) => {
     );
     const legLength = _defaultTo(
         findHoldCommandByType(HOLD_COMMAND_ARG_NAMES.LEG_LENGTH, args),
-        '1min'
+        1
     );
 
     return [turnDirection, legLength, fixName];

@@ -337,6 +337,17 @@ export default class LegModel {
 
     // ------------------------------ PUBLIC ------------------------------
 
+    activateHoldForWaypointName(waypointName, holdParameters) {
+        if (!this.hasWaypointName(waypointName)) {
+            return;
+        }
+
+        const waypointIndex = this._findIndexOfWaypointName(waypointName);
+        const waypointModel = this._waypointCollection[waypointIndex];
+
+        waypointModel.setHoldParametersAndActivateHold(holdParameters);
+    }
+
     /**
      * Return the ICAO identifier for the airport at which this leg will terminate (if
      * it is in fact a STAR leg, of course).
@@ -648,7 +659,7 @@ export default class LegModel {
 
     _findIndexOfWaypointName(waypointName) {
         return _findIndex(this._waypointCollection, (waypointModel) => {
-            return waypointModel.name === waypointName;
+            return waypointModel.name === waypointName.toUpperCase();
         });
     }
 
